@@ -39,7 +39,7 @@ body {
 .number {
     padding: 20px 30px 20px;
     margin: 15px;
-    background-color: gray;
+    background-color: rgb(91, 150, 217);
     border-radius: 8px;
 }
 
@@ -50,3 +50,22 @@ body {
     border-radius: 4px;
 }
 
+#multiplication {
+    background-color: dodgerblue;
+}
+
+#division {
+    background-color: darkorange;
+}
+
+#addition {
+    background-color: violet;
+}
+
+#subtraction {
+    background-color: slateblue;
+}
+
+.numberColor {
+    background-color: hotpink;
+}
