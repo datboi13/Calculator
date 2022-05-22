@@ -19,13 +19,17 @@ function divide(num1, num2) {
 } // function for division
 
 let calculator = document.getElementById('calculator-main')
-let thing = document.getElementById('true-number')
-let display = document.getElementById('display')
+let thing = document.getElementById('true-number') // where the numbers and operations are displayed
+let display = document.getElementById('display') // where the user inputs appear
 let clear = document.querySelector('.clear')
-let operator
-let operative1
-let operative2
-// initialization of all html variables
+// initialization of all html elements
+
+let operator //(x,+,-,or /)
+let operative1 /*(the first number inputted into the 
+calculator before pressing an operator)*/
+let operative2 // number inputted after operator
+let finalAnswer // the computation of the first pair of numbers
+//declaration of all variable to be used in computations
 
 
 
@@ -36,19 +40,23 @@ for(let i = 0; i <= 9; i++) {
    thing.appendChild(number)
    number.textContent = i
    number.addEventListener('click', (e) => {
+    if (finalAnswer != undefined && operator == undefined) {
+        finalAnswer = undefined
+        display.textContent = ''
+    }
        if (display.textContent == 'x'|| display.textContent == '/' ||display.textContent == '+' || display.textContent == '-') 
        { display.textContent = ''}
        display.textContent += number.textContent
-       if (operative1 == undefined) {
+       if (operator == undefined) {
        operative1 = display.textContent
-       return operative1
+       return operative1 
        } else if (operative1 != undefined && display.textContent != 'x' 
        ||display.textContent != '/' || display.textContent != '+' || display.textContent != '-'
         )
         {
          operative2 = display.textContent
         return operative2
-       }
+       }  //to differentiate between the two operatives
    })
 } /* creates all numbers and adds an event listener that changes the 
 display when clicked */
@@ -60,9 +68,44 @@ multiplication.setAttribute('id', 'multiplication')
 thing.appendChild(multiplication)
 multiplication.addEventListener('click', (e) => {
     display.textContent = 'x'
+    if (operative1 != undefined && operative2 != undefined) {
+        if (operator == 'x') {
+            finalAnswer = multiply(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '/') {
+            finalAnswer = divide(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '+') {
+            finalAnswer = add(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '-') {
+            finalAnswer = subtract(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+    } /*this code (which is repeated for all operations) allows the first pair
+    of operatives to be computed before moving on to the following operation*/
+
+
+
+})
+multiplication.addEventListener('click', (e) => {
+    if (finalAnswer != undefined) {
+        operative1 = finalAnswer
+        return operative1
+    }
+})
+multiplication.addEventListener('click', (e) => {
     operator = 'x'
     return operator
-}) //multiplication attribute
+})
+//multiplication attribute
 
 
 let division = document.createElement('div')
@@ -72,9 +115,40 @@ division.setAttribute('id', 'division')
 thing.appendChild(division)
 division.addEventListener('click', (e) => {
     display.textContent = '/'
-   operator = '/'
+    if (operative1 != undefined && operative2 != undefined) {
+        if (operator == 'x') {
+            finalAnswer = multiply(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '/') {
+            finalAnswer = divide(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '+') {
+            finalAnswer = add(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '-') {
+            finalAnswer = subtract(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+    }
+})
+division.addEventListener('click', (e) => {
+    if (finalAnswer != undefined) {
+        operative1 = finalAnswer
+        return operative1
+    }
+})
+division.addEventListener('click', (e) => {
+    operator = '/'
     return operator
-}) //division attribute
+})
+ //division attribute
 
 let subtraction = document.createElement('div')
 subtraction.textContent = '-'
@@ -83,9 +157,43 @@ subtraction.setAttribute('id', 'subtraction')
 thing.appendChild(subtraction)
 subtraction.addEventListener('click', (e) => {
     display.textContent = '-'
+    if (operative1 != undefined && operative2 != undefined) {
+        if (operator == 'x') {
+            finalAnswer = multiply(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '/') {
+            finalAnswer = divide(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '+') {
+            finalAnswer = add(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '-') {
+            finalAnswer = subtract(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+    }
+
+
+
+})
+subtraction.addEventListener('click', (e) => {
+    if (finalAnswer != undefined) {
+        operative1 = finalAnswer
+        return operative1
+    }
+})
+subtraction.addEventListener('click', (e) => {
     operator = '-'
     return operator
-}) //subtraction attribute
+})
+ //subtraction attribute
 
 let addition = document.createElement('div')
 addition.textContent = '+'
@@ -94,14 +202,45 @@ addition.setAttribute('id', 'addition')
 thing.appendChild(addition)
 addition.addEventListener('click', (e) => {
     display.textContent  = '+'
+    if (operative1 != undefined && operative2 != undefined) {
+        if (operator == 'x') {
+            finalAnswer = multiply(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '/') {
+            finalAnswer = divide(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '+') {
+            finalAnswer = add(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+        if (operator == '-') {
+            finalAnswer = subtract(operative1,operative2)
+            operative1 = finalAnswer
+            return operative1
+        }
+    }
+
+})
+addition.addEventListener('click', (e) => {
+    if (finalAnswer != undefined) {
+        operative1 = finalAnswer
+        operative1 = finalAnswer
+            return operative1
+    }
+})
+addition.addEventListener('click', (e) => {
     operator = '+'
     return operator
-}) //addition attribute
+})
+ //addition attribute
 
-function operate(num1, operator, num2) {
-    let answer = operator(num1,num2)
-    return answer
-} //function that calls on previous operators
+
+
 
 let equals = document.createElement('div')
 equals.textContent = '='
@@ -110,20 +249,31 @@ thing.appendChild(equals)
 equals.addEventListener('click', (e) => {
     if (operator == 'x') {
         display.textContent = multiply(operative1, operative2)
+        finalAnswer = multiply(operative1, operative2)
+        operator = undefined
+        return finalAnswer
     } else if (operator == '/') {
         if (operative2 == 0) { alert('Cannot divide by zero')}
         else {
         display.textContent = divide(operative1,operative2)
+        finalAnswer = divide(operative1,operative2)
+        operator = undefined
+        return finalAnswer
         }
 
     } else if (operator == '-') {
         display.textContent = subtract(operative1,operative2)
+        finalAnswer = subtract(operative1,operative2)
+        operator = undefined
+        return finalAnswer
 
     } else if (operator == '+') {
-        Number(operative1)
-        Number(operative2)
-        display.textContent = add(operative1,operative2)
-
+       operative1 = Number(operative1)
+       operative2 = Number(operative2)
+       finalAnswer = add(operative1,operative2)
+        display.textContent = finalAnswer
+        operator =  undefined
+        return finalAnswer
     }
     operative1 = display.textContent
 
@@ -133,11 +283,5 @@ clear.addEventListener('click', (e) => {
     display.textContent = ''
     operative1 = undefined
     operative2 = undefined
+    operator = undefined
 })
-
-
-
-
-
-
-
